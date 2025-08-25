@@ -88,56 +88,69 @@ function Leadform() {
   };
 
   const handleSubmit = async () => {
-    // Basic validation - check required fields
-    if (!formData.realtorPhone) {
-      alert('Please fill in the phone number');
-      return;
-    }
+  if (!formData.realtorPhone) {
+    alert("Please fill in the Form");
+    return;
+  }
 
-    setIsSubmitting(true);
-    setSubmitStatus('');
+  setIsSubmitting(true);
+  setSubmitStatus("");
 
-    try {
-      const response = await fetch('https://n8n.rochomeloans.com/webhook-test/lead-retailer-form', {
-        method: 'POST',
+  try {
+    // ✅ Merge phone with code + format
+    const fullPhone = `${formData.countryCode} ${formData.realtorPhone}`;
+
+    // ✅ Build form body with fullPhone included
+    const dataToSend = {
+      ...formData,
+      fullPhone, // send combined phone field
+    };
+
+    const formBody = new URLSearchParams(dataToSend).toString();
+
+    const response = await fetch(
+      "https://hooks.zapier.com/hooks/catch/1982018/338nql7/",
+      {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
         },
-        body: JSON.stringify(formData)
-      });
-
-      if (response.ok) {
-        setSubmitStatus('success');
-        // Reset form after successful submission
-        setTimeout(() => {
-          setFormData({
-            realtorFirstName: '',
-            realtorLastName: '',
-            realtorEmail: '',
-            countryCode: '+1',
-            realtorPhone: '',
-            realEstateOfficeName: '',
-            accountExecutive: '',
-            notes: '',
-            streetAddress: '',
-            addressLine2: '',
-            city: '',
-            state: '',
-            postalCode: '',
-            country: 'United States'
-          });
-          setSubmitStatus('');
-        }, 3000);
-      } else {
-        setSubmitStatus('error');
+        body: formBody,
       }
-    } catch (error) {
-      console.error('Submit error:', error);
-      setSubmitStatus('error');
-    } finally {
-      setIsSubmitting(false);
+    );
+
+    if (response.ok) {
+      setSubmitStatus("success");
+      setTimeout(() => {
+        setFormData({
+          realtorFirstName: "",
+          realtorLastName: "",
+          realtorEmail: "",
+          countryCode: "+1",
+          realtorPhone: "",
+          realEstateOfficeName: "",
+          accountExecutive: "",
+          notes: "",
+          streetAddress: "",
+          addressLine2: "",
+          city: "",
+          state: "",
+          postalCode: "",
+          country: "United States",
+        });
+        setSubmitStatus("");
+      }, 3000);
+    } else {
+      setSubmitStatus("error");
     }
-  };
+  } catch (error) {
+    console.error("Submit error:", error);
+    setSubmitStatus("error");
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   const styles = {
     container: {
@@ -353,6 +366,7 @@ function Leadform() {
                     style={styles.input}
                     onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
                     onBlur={(e) => Object.assign(e.target.style, styles.input)}
+                    required
                   />
                 </div>
                 <div style={styles.formGroup}>
@@ -362,6 +376,7 @@ function Leadform() {
                   <input
                     type="text"
                     name="realtorLastName"
+                    required
                     value={formData.realtorLastName}
                     onChange={handleInputChange}
                     style={styles.input}
@@ -384,6 +399,7 @@ function Leadform() {
                   style={styles.input}
                   onFocus={(e) => Object.assign(e.target.style, styles.inputFocus)}
                   onBlur={(e) => Object.assign(e.target.style, styles.input)}
+                  required
                 />
               </div>
 
@@ -410,7 +426,7 @@ function Leadform() {
                     name="realtorPhone"
                     value={formData.realtorPhone}
                     onChange={handleInputChange}
-                    placeholder="Enter phone number"
+                    placeholder="1234-567-890"
                     style={{ ...styles.input, ...styles.phoneInput }}
                     onFocus={(e) => Object.assign(e.target.style, { ...styles.input, ...styles.phoneInput, ...styles.inputFocus })}
                     onBlur={(e) => Object.assign(e.target.style, { ...styles.input, ...styles.phoneInput })}
