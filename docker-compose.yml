@@ -3,7 +3,7 @@ version: '3.9'
 services:
   frontend:
     build: .
-    container_name: vite-frontend
+    container_name: rochomeloans
     ports:
       - "5178:80"
     restart: always
