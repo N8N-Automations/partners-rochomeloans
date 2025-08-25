@@ -5,5 +5,5 @@ services:
     build: .
     container_name: vite-frontend
     ports:
-      - "5173:80"
+      - "5178:80"
     restart: always
