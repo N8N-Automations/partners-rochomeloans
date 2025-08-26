@@ -356,7 +356,7 @@ function Leadform() {
               <div style={styles.row} className="form-row">
                 <div style={styles.formGroup}>
                   <label style={styles.label}>
-                    Realtor's First Name
+                    Realtor's First Name <span style={styles.required}>*</span>
                   </label>
                   <input
                     type="text"
@@ -371,7 +371,7 @@ function Leadform() {
                 </div>
                 <div style={styles.formGroup}>
                   <label style={styles.label}>
-                    Realtor's Last Name
+                    Realtor's Last Name <span style={styles.required}>*</span>
                   </label>
                   <input
                     type="text"
@@ -389,7 +389,7 @@ function Leadform() {
               {/* Realtor Email */}
               <div style={styles.formGroup}>
                 <label style={styles.label}>
-                  Realtor's Email
+                  Realtor's Email <span style={styles.required}>*</span>
                 </label>
                 <input
                   type="email"
@@ -406,7 +406,7 @@ function Leadform() {
               {/* Realtor Phone */}
               <div style={styles.formGroup}>
                 <label style={styles.label}>
-                  Phone <span style={styles.required}>*</span>
+                  Realtor's Phone <span style={styles.required}>*</span>
                 </label>
                 <div style={styles.phoneGroup}>
                   <select
