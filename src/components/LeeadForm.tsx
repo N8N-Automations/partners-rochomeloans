@@ -463,11 +463,12 @@ function Leadform() {
                   style={styles.select}
                 >
                   <option value="">-- Select --</option>
-                  <option value="Carlos Jimenez">Carlos Jimenez</option>
                   <option value="Ivan Duarte">Ivan Duarte</option>
                   <option value="Patrick Fleming">Patrick Fleming</option>
                   <option value="Christopher Mullen">Christopher Mullen</option>
                   <option value="Yauvan Kumar">Yauvan Kumar</option>
+                  <option value="Zunaira Asghar">Zunaira Asghar</option>
+                  <option value="Michael Simpson">Michael Simpson</option>
                 </select>
               </div>
 
